@@ -1,0 +1,24 @@
+{
+  "name": "fake-resturant-finder",
+  "version": "1.0.0",
+  "description": "This project accepts a json array for nearby resturants &amp; displays them &amp; you can find &amp; sort them",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "npx live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superhit0/fake-resturant-finder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/superhit0/fake-resturant-finder/issues"
+  },
+  "homepage": "https://github.com/superhit0/fake-resturant-finder#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
