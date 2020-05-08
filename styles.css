@@ -20,6 +20,12 @@ body {
     max-width: 600px;
 }
 
+.display-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+}
+
 #search-input {
     width: 100%;
     font-size: 1.4rem;
@@ -41,4 +47,9 @@ body {
     flex-shrink: 1;
     font-size: 1.1rem;
     margin-right: 1px
+}
+
+.row-item {
+    grid-template-columns: repeat(6, 1fr);
+    border-bottom: 1px solid white;
 }
