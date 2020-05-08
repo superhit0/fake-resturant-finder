@@ -11,8 +11,7 @@ function getHeaderNames([ firstResturant ]) {
   return Object.keys(firstResturant);
 }
 
-function buildHeader(resturants) {
-  const container = document.getElementById('header-container');
+function buildHeaderFragment(resturants) {
   const headerTemplate = document.querySelector("#header-item");
   const headerFragment = document.createDocumentFragment();
   const headerNames = getHeaderNames(resturants);
@@ -25,7 +24,7 @@ function buildHeader(resturants) {
     headerFragment.appendChild(cloneButton);
   });
 
-  container.appendChild(headerFragment);
+  return headerFragment;
 }
 
 function buildRowItem(key, val) {
@@ -42,6 +41,7 @@ function buildView(resturants) {
   const displayContainer = document.getElementById('display-container');
   const headerNames = getHeaderNames(resturants);
   const displaySection = document.createDocumentFragment();
+  displaySection.appendChild(buildHeaderFragment(resturants));
 
   resturants.forEach(resturant => {
     headerNames.forEach(header => {
@@ -54,7 +54,6 @@ function buildView(resturants) {
 
 async function exec() {
   const resturants = await require('assets/resturants.json');
-  buildHeader(resturants);
   buildView(resturants);
   console.log(resturants);
 }

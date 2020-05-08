@@ -23,7 +23,9 @@ body {
 .display-container {
     width: 100%;
     display: grid;
+    margin-top: 20px;
     grid-template-columns: repeat(11, 1fr);
+    grid-gap: 2px;
 }
 
 #search-input {
@@ -33,23 +35,16 @@ body {
     padding: 2px;
 }
 
-.header-container {
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.header {
-    border-bottom: 1px solid #eee;
-}
-
 .header-item-button {
     flex-shrink: 1;
     font-size: 1.1rem;
-    margin-right: 1px
+    margin-bottom: 20px;
+    border-radius: 2px;
 }
 
 .row-item {
-    grid-template-columns: repeat(6, 1fr);
-    border-bottom: 1px solid white;
+    text-align: center;
+    background-color: #eee;
+    color: black;
+    border-radius: 2px;
 }
