@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2980b9;
+}
+
+.container {
+    width: 90vw;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #eee;
+}
+
+.search-container {
+    width: 40%;
+    min-width: 300px;
+    max-width: 600px;
+}
+
+#search-input {
+    width: 100%;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.header {
+    border-bottom: 1px solid #eee;
+}
