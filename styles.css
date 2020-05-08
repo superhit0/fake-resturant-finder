@@ -27,6 +27,18 @@ body {
     padding: 2px;
 }
 
+.header-container {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
 .header {
     border-bottom: 1px solid #eee;
+}
+
+.header-item-button {
+    flex-shrink: 1;
+    font-size: 1.1rem;
+    margin-right: 1px
 }
