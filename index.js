@@ -66,14 +66,17 @@ function buildView(resturants) {
 
 function updateResturants(resturants, regex) {
   displayContainer.innerHTML = '';
-  buildView(resturants.filter(resturant => resturant['Restaurant Name'].match(regex)));
+  if(regex)
+    buildView(resturants.filter(resturant => resturant['Restaurant Name'].match(regex)));
+  else
+    buildView(resturants);
 }
 
 const debouncedUpdateResturants = debounce(updateResturants);
 
 async function exec() {
   const resturants = await require('assets/resturants.json');
-  buildView(resturants);
+  updateResturants(resturants);
   searchInput.addEventListener('keyup', (e) => {
     if( e.target.value )
       debouncedUpdateResturants(resturants, e.target.value);
