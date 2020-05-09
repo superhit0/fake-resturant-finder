@@ -1,6 +1,19 @@
+const searchInput = document.getElementById('search-input');
+const displayContainer = document.getElementById('display-container');
+
 async function require(path) {
   const response = await fetch(path);
   return response.json();
+}
+
+function debounce(fn, delay = 300) {
+  let timeout = null;
+  return function (...args) {
+    if(timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
 }
 
 function nameToDataAttribute(name) {
@@ -38,7 +51,6 @@ function buildRowItem(key, val) {
 }
 
 function buildView(resturants) {
-  const displayContainer = document.getElementById('display-container');
   const headerNames = getHeaderNames(resturants);
   const displaySection = document.createDocumentFragment();
   displaySection.appendChild(buildHeaderFragment(resturants));
@@ -52,10 +64,22 @@ function buildView(resturants) {
   displayContainer.appendChild(displaySection);
 }
 
+function updateResturants(resturants, regex) {
+  displayContainer.innerHTML = '';
+  buildView(resturants.filter(resturant => resturant['Restaurant Name'].match(regex)));
+}
+
+const debouncedUpdateResturants = debounce(updateResturants);
+
 async function exec() {
   const resturants = await require('assets/resturants.json');
   buildView(resturants);
-  console.log(resturants);
+  searchInput.addEventListener('keyup', (e) => {
+    if( e.target.value )
+      debouncedUpdateResturants(resturants, e.target.value);
+    else
+      debouncedUpdateResturants(resturants, /.*/);
+  });
 }
 
 exec();
