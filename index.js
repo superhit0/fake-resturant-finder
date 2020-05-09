@@ -33,7 +33,7 @@ function buildHeaderFragment(resturants) {
     const clone = headerTemplate.content.cloneNode(true);
     const cloneButton = clone.querySelector('.header-item-button');
     cloneButton.innerText = name;
-    cloneButton.setAttribute(nameToDataAttribute(name),  name);
+    cloneButton.setAttribute('data-type',  name);
     headerFragment.appendChild(cloneButton);
   });
 
@@ -74,15 +74,45 @@ function updateResturants(resturants, regex) {
 
 const debouncedUpdateResturants = debounce(updateResturants);
 
+function resturantSorter(resturants, key, mul) {
+  if(resturants.length <= 1) return;
+  resturants.sort((a,b) => {
+    const aVal = isNaN(Number(a[key])) ? a[key] : Number(a[key]);
+    const bVal = isNaN(Number(b[key])) ? b[key] : Number(b[key]);
+    if(aVal < bVal) {
+      return -1*mul;
+    } else if(aVal > bVal) {
+      return mul;
+    }
+
+    return 0;
+  });
+  updateResturants(resturants);
+}
+
 async function exec() {
   const resturants = await require('assets/resturants.json');
+  const sort = {};
   updateResturants(resturants);
+
   searchInput.addEventListener('keyup', (e) => {
+    e.stopPropagation();
     if( e.target.value )
       debouncedUpdateResturants(resturants, e.target.value);
     else
       debouncedUpdateResturants(resturants, /.*/);
   });
+
+  displayContainer.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const { target } = e;
+    if(target.nodeName === 'BUTTON' && target.classList.contains('header-item-button')) {
+      const type = target.dataset['type'];
+      const mul = sort[type] || 1;
+      resturantSorter(resturants, type, -1 * mul);
+      sort[type] = -1*mul;
+    }
+  }, false);
 }
 
 exec();
